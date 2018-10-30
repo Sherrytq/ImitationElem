@@ -1,16 +1,17 @@
 <template>
   <div class="star" :class="starType">
-    <span v-for="(itemClass,index) in itemClasses" :class="itemClass" class="star-item" :key="index"></span>
+    <span v-for = "(itemClass, index) in itemClasses" class="star-item" :key="index" :class="itemClass"></span>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script type='text/ecmascript-6'>
   const LENGTH = 5;
-  const CLS_ON = 'on';
-  const CLS_HALF = 'half';
-  const CLS_OFF = 'off';
+  const CLS_ON = "on";
+  const CLS_HALF = "half";
+  const CLS_OFF = "off";
 
   export default {
+    name: '',
     props: {
       size: {
         type: Number
@@ -20,29 +21,36 @@
       }
     },
     computed: {
-      starType() {
+      starType(){
         return 'star-' + this.size;
       },
       itemClasses() {
         let result = [];
-        let score = Math.floor(this.score * 2) / 2;
+        let score = Math.floor(this.score * 2)/2;
+        console.log(this.score);
         let hasDecimal = score % 1 !== 0;
         let integer = Math.floor(score);
-        for (let i = 0; i < integer; i++) {
-          result.push(CLS_ON);
+        for(let i = 0; i< integer; i++){
+          result.push(CLS_ON)
         }
-        if (hasDecimal) {
+        if(hasDecimal){
           result.push(CLS_HALF);
         }
-        while (result.length < LENGTH) {
+        while (result.length < LENGTH){
           result.push(CLS_OFF);
         }
         return result;
       }
-    }
-  };
-</script>
+    },
+    data () {
+      return {
+      }
+    },
 
+    methods: {}
+  }
+
+</script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
 
